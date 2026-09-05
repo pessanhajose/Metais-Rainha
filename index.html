@@ -65,9 +65,16 @@
     padding:16px 32px;max-width:1180px;margin:0 auto;
   }
   .logo{
+    display:flex;flex-direction:column;gap:3px;
+  }
+  .logo-title{
     display:flex;align-items:baseline;gap:0;
     font-family:'Oswald',sans-serif;font-size:26px;font-weight:600;
     color:var(--off-white);
+  }
+  .logo-tagline{
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:400;
+    color:#b7b7b6;letter-spacing:0.15px;
   }
   .crown-wrap{position:relative;display:inline-block;}
   .crown-wrap svg{
@@ -75,7 +82,7 @@
     width:20px;height:auto;
     pointer-events:none;
   }
-  .logo .rainha{color:var(--silver);font-weight:500;margin-left:8px;}
+  .logo-title .rainha{color:var(--silver);font-weight:500;margin-left:8px;}
 
   nav.main-nav{display:flex;align-items:center;gap:36px;}
   nav.main-nav a{
@@ -247,7 +254,7 @@
   .gallery .section-head p{color:#c9c9c8;}
 
   .carousel{position:relative;max-width:1180px;margin:0 auto;padding:0 32px;}
-  .carousel-track{position:relative;overflow:hidden;}
+  .carousel-track{position:relative;overflow:hidden;padding:22px 14px 32px;}
   .carousel-slide{
     display:none;
     grid-template-columns:repeat(4,1fr);gap:16px;
@@ -259,6 +266,14 @@
     background-size:cover;background-position:center;background-repeat:no-repeat;
     border:1px solid rgba(192,192,192,0.25);
     opacity:1;transform:none;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease, border-color .35s ease;
+    will-change:transform;
+  }
+  .tile:hover{
+    transform:translateY(-22px) scale(1.08);
+    box-shadow:0 26px 40px rgba(0,0,0,0.55);
+    border-color:rgba(192,192,192,0.6);
+    z-index:3;
   }
   .tile--ferro{background-image:var(--img-ferro);}
   .tile--aluminio{background-image:var(--img-aluminio);}
@@ -317,6 +332,8 @@
 
   @media (prefers-reduced-motion: reduce){
     .tile-enter{animation:none;opacity:1;transform:none;}
+    .tile{transition:none;}
+    .tile:hover{transform:none;}
   }
 
   /* ===== RESPONSIVE ===== */
@@ -343,11 +360,17 @@
     .header-cta{display:none;}
     .wrap{padding:0 20px;}
     .header-inner{padding:14px 20px;}
+    .logo-title{font-size:22px;}
+    .logo-tagline{font-size:9.5px;}
     .mat-grid{grid-template-columns:1fr 1fr;}
     .carousel{padding:0 20px;}
     .carousel-slide{grid-template-columns:1fr;}
     .tile{height:220px;}
     .car-btn{width:36px;height:36px;font-size:15px;}
+  }
+
+  @media (max-width:420px){
+    .logo-tagline{display:none;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -361,22 +384,25 @@
 <header>
   <div class="header-inner">
     <a href="#top" class="logo">
-      <span class="crown-wrap">
-        <svg viewBox="0 0 100 60" aria-hidden="true">
-          <defs>
-            <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f0d878"/>
-              <stop offset="100%" stop-color="#b8912b"/>
-            </linearGradient>
-          </defs>
-          <polygon points="4,52 4,24 24,40 50,8 76,40 96,24 96,52" fill="url(#goldGrad)" stroke="#8a6d1a" stroke-width="3" stroke-linejoin="round"/>
-          <circle cx="24" cy="30" r="5.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
-          <circle cx="50" cy="17" r="6.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
-          <circle cx="76" cy="30" r="5.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
-          <rect x="4" y="50" width="92" height="8" fill="url(#goldGrad)" stroke="#8a6d1a" stroke-width="2"/>
-        </svg>
-        M
-      </span>etais<span class="rainha">Rainha</span>
+      <span class="logo-title">
+        <span class="crown-wrap">
+          <svg viewBox="0 0 100 60" aria-hidden="true">
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0d878"/>
+                <stop offset="100%" stop-color="#b8912b"/>
+              </linearGradient>
+            </defs>
+            <polygon points="4,52 4,24 24,40 50,8 76,40 96,24 96,52" fill="url(#goldGrad)" stroke="#8a6d1a" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="24" cy="30" r="5.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
+            <circle cx="50" cy="17" r="6.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
+            <circle cx="76" cy="30" r="5.5" fill="#fff3c4" stroke="#8a6d1a" stroke-width="1.5"/>
+            <rect x="4" y="50" width="92" height="8" fill="url(#goldGrad)" stroke="#8a6d1a" stroke-width="2"/>
+          </svg>
+          M
+        </span>etais<span class="rainha">Rainha</span>
+      </span>
+      <span class="logo-tagline">Compra e reciclagem de metais ferrosos e não ferrosos</span>
     </a>
 
     <nav class="main-nav" id="mainNav">
